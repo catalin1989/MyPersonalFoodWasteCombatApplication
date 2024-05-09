@@ -4,9 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 @Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,25 +21,4 @@ public class Food {
     private int quantity;
     private LocalDate expirationDate;
 
-    public Food(String name, int quantity, LocalDate expirationDate) {
-        this.name = name;
-        this.quantity = quantity;
-        this.expirationDate = expirationDate;
-    }
-
-    public Food() {
-
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public LocalDate getExpirationDate() {
-        return expirationDate;
-    }
 }

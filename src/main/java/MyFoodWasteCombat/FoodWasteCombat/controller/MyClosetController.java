@@ -2,28 +2,22 @@ package MyFoodWasteCombat.FoodWasteCombat.controller;
 
 import MyFoodWasteCombat.FoodWasteCombat.food.Food;
 import MyFoodWasteCombat.FoodWasteCombat.service.FoodService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Controller
-public class MyClosetController implements MyController {
+@RequiredArgsConstructor
+public class MyClosetController  {
 
     private final FoodService foodService;
 
-    @Autowired
-    public MyClosetController(FoodService foodService) {
-        this.foodService = foodService;
-    }
 
-    @Override
+
     @GetMapping("/closet")
     public String getPage() {
 
@@ -31,9 +25,9 @@ public class MyClosetController implements MyController {
     }
 
     @PostMapping("/closet/add")
-    public String addFoodInCloset(@RequestParam("name") String name, @RequestParam("quantity") int quantity, @RequestParam("expiration_date") LocalDate expirationDate) {
+    public String addFoodInCloset(@ModelAttribute Food food, Model model) {
 
-        foodService.insertFoodInCloset(name, quantity, expirationDate);
+        foodService.insertOrUpdateFood(food.getName(), food.getQuantity(), food.getExpirationDate());
 
         return "redirect:/closet";
     }
@@ -43,6 +37,26 @@ public class MyClosetController implements MyController {
     List<Food> foods=foodService.selectAllFoodsInCloset();
     model.addAttribute("foods",foods);
     return "closet_foods";
+    }
+
+    @PostMapping("/closet/remove")
+    public String removeOrUpdateFood(@ModelAttribute Food food, Model model){
+        foodService.removeOrUpdateFood(food.getName(),food.getQuantity());
+        return  "redirect:/closet";
+    }
+
+    @PostMapping("/closet/foods_that_will_expire_soon")
+    public String seeFoodsThatWillExpireSoon(@RequestParam("expirationDate") LocalDate expirationDate, Model model ){
+        System.out.println("here");
+        List<Food>foods=foodService.selectFoodsThatWillExpireSoon(expirationDate);
+        model.addAttribute("foods",foods);
+        return "closet_foods_thatWillExpireSoon";
+    }
+
+    @GetMapping("/closet/clearAll")
+    public String clearAllFoods(){
+        foodService.clearAllFoodsInCloset();
+        return "redirect:/closet";
     }
 
 }
