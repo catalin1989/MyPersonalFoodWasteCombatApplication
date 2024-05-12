@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Food {
+public class Food implements Comparable<Food> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,4 +21,12 @@ public class Food {
     private int quantity;
     private LocalDate expirationDate;
 
+    @Override
+    public int compareTo(Food o) {
+
+        if(this.name.compareTo(o.name)==0){
+            return this.getExpirationDate().compareTo(o.getExpirationDate());
+        }
+        return this.name.compareTo(o.name);
+    }
 }
