@@ -2,9 +2,9 @@ package MyFoodWasteCombat.FoodWasteCombat.service;
 
 import org.junit.jupiter.api.BeforeEach;
 
-class FoodInClosetServiceTest {
+class MyFoodServiceTest {
 
-   private FoodInClosetService foodInClosetService;
+   private MyFoodService myFoodService;
    @BeforeEach
     void setUp(){
 

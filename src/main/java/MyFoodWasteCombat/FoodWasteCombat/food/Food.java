@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-@Entity
+@Entity(name="food")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,6 +20,7 @@ public class Food implements Comparable<Food> {
     private String name;
     private int quantity;
     private LocalDate expirationDate;
+    private String place;
 
     @Override
     public int compareTo(Food o) {
@@ -28,5 +29,16 @@ public class Food implements Comparable<Food> {
             return this.getExpirationDate().compareTo(o.getExpirationDate());
         }
         return this.name.compareTo(o.name);
+    }
+
+    @Override
+    public String toString() {
+        return "Food{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", quantity=" + quantity +
+                ", expirationDate=" + expirationDate +
+                ", place='" + place + '\'' +
+                '}';
     }
 }

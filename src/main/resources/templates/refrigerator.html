@@ -6,30 +6,9 @@
 </head>
 <body>
 <h1>Welcome to the refrigerator! </h1>
-<h3>Add a food type below</h3>
-<p>----------------------------</p>
-<form action="/refrigerator/add" method="post">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name"><br>
-    <label for="quantity">Quantity:</label>
-    <input type="number" id="quantity" name="quantity"><br>
-    <label for="expirationDate">Expiration Date:</label>
-    <input type="date" id="expirationDate" name="expirationDate"><br>
-    <button type="submit">Add Food</button>
-</form>
 <p>-----------------------------</p>
 <h3>To see all foods type that are stored in the refrigerator press the button below</h3>
 <button><a href="/refrigerator/foods">See all foods in Refrigerator </a></button><br>
-<h3>Remove food from the refrigerator</h3>
-<form action="/refrigerator/remove" method="post">
-    <label for="nameOfRemovedFood">Name:</label>
-    <input type="text" id="nameOfRemovedFood" name="name"><br>
-    <label for="quantityOfRemovedFood">Quantity:</label>
-    <input type="number" id="quantityOfRemovedFood" name="quantity"><br>
-    <label for="expirationOfFoodToRemoveDate">Expiration Date:</label>
-    <input type="date" id="expirationOfFoodToRemoveDate" name="expirationDate"><br>
-    <button type="submit">Remove food </button>
-</form>
 <h3> To see the foods that expire until a specific date, select the date and press the button</h3>
 <form action="/refrigerator/foods_that_will_expire_soon" method="post">
     <label for="foodsThatWillExpireSoon">Expiration Date:</label>
