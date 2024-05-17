@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <title>All Foods in Closet</title>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 <h1>All Foods in Closet</h1>
+<div>
+  <a href="/closet/foods/create"><img class="button" src="/add-button.png" ></a>
+</div>
 <table>
   <thead>
   <tr>
@@ -20,8 +24,16 @@
     <td th:text="${food.name}"></td>
     <td th:text="${food.quantity}"></td>
     <td th:text="${food.expirationDate}"></td>
+    <td>
+      <div>
+        <a th:href="@{/closet/foods/edit/{id}(id=${food.id})}"><img class="button" src="/edit-button.png" ></a>
+        <a th:href="@{/closet/foods/delete/{id}(id=${food.id})}"><img class= "button" src="/delete-button.png" ></a>
+      </div>
+    </td>
   </tr>
+
   </tbody>
+
 </table>
 </body>
 </html>

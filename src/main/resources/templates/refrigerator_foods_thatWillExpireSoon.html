@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Foods that will expire soon</title>
+</head>
+<body>
+<h1>Foods that will expire soon</h1>
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Expiration Date</th>
+  </tr>
+  </thead>
+  <tbody>
+  <!-- Loop through the list of foods and display them -->
+  <tr th:each="food : ${foods}">
+    <td th:text="${food.name}"></td>
+    <td th:text="${food.quantity}"></td>
+    <td th:text="${food.expirationDate}"></td>
+  </tr>
+  </tbody>
+
+</table>
+</body>
+</html>
