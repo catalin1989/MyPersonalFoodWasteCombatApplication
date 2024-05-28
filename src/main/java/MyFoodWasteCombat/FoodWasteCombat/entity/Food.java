@@ -1,4 +1,4 @@
-package MyFoodWasteCombat.FoodWasteCombat.food;
+package MyFoodWasteCombat.FoodWasteCombat.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,6 +21,11 @@ public class Food implements Comparable<Food> {
     private int quantity;
     private LocalDate expirationDate;
     private String place;
+
+    public Food(String name, int quantity) {
+        this.name = name;
+        this.quantity = quantity;
+    }
 
     @Override
     public int compareTo(Food o) {

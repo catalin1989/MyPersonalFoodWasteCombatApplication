@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping List</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h2>My shopping list</h2>
+<div>
+    <a href="/shopping-list/generate"><img class="button" src="/generate.jpeg" ></a>
+    <a href="/shopping-list/add"><img class="button" src="/add-button.png" ></a>
+    <a href="/shopping-list/delete-all"><img class= "button" src="/delete.jpeg" ></a>
+</div>
+<form th:action="@{/shopping-list/save-foods}" method="get">
+<table>
+<thead>
+<tr>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Checked</th>
+</tr>
+</thead>
+    <tbody>
+    <!-- Loop through the list of foods and display them -->
+    <tr th:each="food: ${foods}">
+        <td th:text="${food.name}"> </td>
+        <td th:text="${food.quantity}"></td>
+        <td><input type="checkbox"></td>
+    </tr>
+    </tbody>
+</table>
+    <button type="submit">Save shopping list</button>
+</form>
+</body>
+</html>

@@ -1,18 +1,19 @@
 package MyFoodWasteCombat.FoodWasteCombat.controller;
 
-import MyFoodWasteCombat.FoodWasteCombat.food.Food;
+import MyFoodWasteCombat.FoodWasteCombat.entity.Food;
 import MyFoodWasteCombat.FoodWasteCombat.service.MyFoodService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 
-public class MyController {
+public class MyClosetController {
 
     private final MyFoodService myFoodService;
 
@@ -21,15 +22,6 @@ public class MyController {
         return "closet";
     }
 
-    @GetMapping("/freezer")
-    public String getFreezer(){
-        return "freezer";
-    }
-
-    @GetMapping("/refrigerator")
-    public String getRefrigerator(){
-        return "refrigerator";
-    }
 
     @GetMapping("/closet/foods")
     public String getFoodsInCloset(Model model){
@@ -44,7 +36,8 @@ public class MyController {
     }
     @PostMapping("/closet/foods/create")
     public String addFoodToClosed(@ModelAttribute Food food){
-        myFoodService.saveFoodToCloset(food);
+        food.setPlace("closet");
+        myFoodService.saveFood(food);
         return "redirect:/closet/foods";
     }
     @GetMapping("/closet/foods/edit/{id}")
@@ -62,5 +55,19 @@ public class MyController {
     public String deleteFood(@PathVariable("id") Long id){
         myFoodService.deleteFoodById(id);
         return "redirect:/closet/foods";
+    }
+
+    @PostMapping("/closet/foods_that_will_expire_soon")
+    public String getFoodsThatWillExpireSoon(@RequestParam("expirationDate") LocalDate expirationDate, Model model){
+        expirationDate = expirationDate.plusDays(1);
+        List<Food> listOfFoods=myFoodService.getAllFoodBeforeExpiration("closet",expirationDate);
+        model.addAttribute("foods",listOfFoods);
+        return "foodsThatWillExpireSoon";
+    }
+
+    @GetMapping("/closet/clearAll")
+    public String clearAll(){
+        myFoodService.deleteFoodByPlace("closet");
+        return "redirect:/closet";
     }
 }

@@ -5,10 +5,11 @@
     <title>Refrigerator</title>
 </head>
 <body>
-<h1>Welcome to the refrigerator! </h1>
+<h2>Welcome to the refrigerator! </h2>
 <p>-----------------------------</p>
 <h3>To see all foods type that are stored in the refrigerator press the button below</h3>
 <button><a href="/refrigerator/foods">See all foods in Refrigerator </a></button><br>
+<p>-----------------------------</p>
 <h3> To see the foods that expire until a specific date, select the date and press the button</h3>
 <form action="/refrigerator/foods_that_will_expire_soon" method="post">
     <label for="foodsThatWillExpireSoon">Expiration Date:</label>
@@ -18,5 +19,11 @@
 <p>-----------------------------</p>
 <h3>To clear the refrigerator of all foods press the button below</h3>
 <button><a href="/refrigerator/clearAll">Clear the refrigerator</a></button>
+<p>-----------------------------</p>
+<div>
+    <a href="/freezer">Go to freezer</a>
+    <a href="http://localhost:8085/">Go to main menu</a>
+    <a href="/closet">Go to closet</a>
+</div>
 </body>
 </html>
