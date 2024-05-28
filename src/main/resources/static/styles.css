@@ -2,3 +2,9 @@
     width: 40px; /* Set the width of the image */
     height: 40px; /* Set the height of the image */
 }
+
+.checkbox-container {
+    display: inline-block;
+    margin-right: 40px;
+}
+

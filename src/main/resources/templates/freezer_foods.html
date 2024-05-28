@@ -6,10 +6,10 @@
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<a href="/refrigerator">Go back</a>
-<h1>All Foods in Refrigerator</h1>
+<h1>All Foods in Freezer</h1>
+<a href="/freezer">Go back</a>
 <div>
-  <a href="/refrigerator/foods/create"><img class="button" src="/add-button.png" ></a>
+  <a href="/freezer/foods/create"><img class="button" src="/add-button.png" ></a>
 </div>
 <table>
   <thead>
@@ -22,17 +22,17 @@
   <tbody>
   <!-- Loop through the list of foods and display them -->
   <tr th:each="food : ${foods}">
-
     <td th:text="${food.name}"></td>
     <td th:text="${food.quantity}"></td>
     <td th:text="${food.expirationDate}"></td>
     <td>
       <div>
-        <a th:href="@{/refrigerator/foods/edit/{id}(id=${food.id})}"><img class="button" src="/edit-button.png" ></a>
-        <a th:href="@{/refrigerator/foods/delete/{id}(id=${food.id})}"><img class= "button" src="/delete-button.png" ></a>
+        <a th:href="@{/freezer/foods/edit/{id}(id=${food.id})}"><img class="button" src="/edit-button.png" ></a>
+        <a th:href="@{/freezer/foods/delete/{id}(id=${food.id})}"><img class= "button" src="/delete-button.png" ></a>
       </div>
     </td>
   </tr>
+
   </tbody>
 
 </table>

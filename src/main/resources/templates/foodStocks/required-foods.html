@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Required foods</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h2>This list represents the minimum food stock of our house </h2>
+<div>
+    <a href="/required-foods/create"><img class="button" src="/add-button.png" ></a>
+    <a href="/required-foods/delete-all"><img class= "button" src="/delete.jpeg" ></a>
+</div>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the list of foods and display them -->
+    <tr th:each="food : ${listOfFoods}">
+        <td th:text="${food.name}"></td>
+        <td th:text="${food.quantity}"></td>
+
+        <td>
+            <div>
+                <a th:href="@{/required-foods/edit/{id}(id=${food.id})}"><img class="button" src="/edit-button.png" ></a>
+                <a th:href="@{/required-foods/delete/{id}(id=${food.id})}"><img class= "button" src="/delete-button.png" ></a>
+            </div>
+        </td>
+    </tr>
+
+    </tbody>
+
+</table>
+<a href="http://localhost:8085/">Go to main menu</a>
+</body>
+</html>
