@@ -13,7 +13,7 @@ public interface MyFoodRepository extends JpaRepository<Food,Long> {
     List<Food> getFoodByName(String name);
 
     List<Food> getFoodByPlaceAndExpirationDateBefore(String place, LocalDate expirationDate);
-
+    List<Food> getFoodByNameAndPlace(String name, String place);
     void deleteFoodByPlace(String place);
 }
 

@@ -26,6 +26,12 @@ public class Food implements Comparable<Food> {
         this.name = name;
         this.quantity = quantity;
     }
+    public Food(String name, int quantity,String place) {
+        this.name = name;
+        this.quantity = quantity;
+        this.place = place;
+    }
+
 
     @Override
     public int compareTo(Food o) {

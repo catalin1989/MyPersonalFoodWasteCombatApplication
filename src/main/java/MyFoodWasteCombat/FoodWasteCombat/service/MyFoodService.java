@@ -24,14 +24,12 @@ public class MyFoodService {
         foodRepository.save(food);
     }
 
-    public void updateFoodToCloset(Food food){
+    public void updateFood(Food food){
         Food existingFood=foodRepository.getReferenceById(food.getId());
-        System.out.println(existingFood);
         if(food.getExpirationDate()==null) {
             food.setExpirationDate(existingFood.getExpirationDate());
         }
        food.setPlace(existingFood.getPlace());
-        System.out.println(food);
         foodRepository.save(food);
     }
 

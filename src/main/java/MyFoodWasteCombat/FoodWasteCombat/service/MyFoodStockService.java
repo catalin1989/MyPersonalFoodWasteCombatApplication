@@ -1,10 +1,10 @@
 package MyFoodWasteCombat.FoodWasteCombat.service;
 
 import MyFoodWasteCombat.FoodWasteCombat.entity.Food;
-import MyFoodWasteCombat.FoodWasteCombat.entity.FoodStock;
-import MyFoodWasteCombat.FoodWasteCombat.repository.MyFoodStockRepository;
+import MyFoodWasteCombat.FoodWasteCombat.repository.MyFoodRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,28 +13,28 @@ import java.util.List;
 
 public class MyFoodStockService {
 
-    private final MyFoodStockRepository stockRepository;
+    private final MyFoodRepository foodRepository;
 
-    public List<FoodStock> getAllFoodStock() {
-        return stockRepository.findAll();
+    public List<Food> getAllFoodStock() {
+        return foodRepository.getFoodByPlace("food_stock");
     }
 
-    public void addFoodStock(FoodStock foodStock) {
-        stockRepository.save(foodStock);
+    public void addFoodStock(Food food) {
+        foodRepository.save(food);
     }
-
+    @Transactional
     public void deleteAllFoodStock() {
-        stockRepository.deleteAll();
+        foodRepository.deleteFoodByPlace("food_stock");
     }
 
-    public FoodStock getFoodStockById(Long id) {
-       return stockRepository.getReferenceById(id);
+    public Food getFoodStockById(Long id) {
+       return foodRepository.getReferenceById(id);
     }
-    public void updateFoodStock(FoodStock foodStock){
-        stockRepository.save(foodStock);
+    public void updateFoodStock(Food food){
+        foodRepository.save(food);
     }
     public void deleteById(Long id) {
-        stockRepository.deleteById(id);
+        foodRepository.deleteById(id);
     }
 
 }

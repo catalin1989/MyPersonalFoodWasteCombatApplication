@@ -27,10 +27,17 @@
         <td th:text="${food.name}"> </td>
         <td th:text="${food.quantity}"></td>
         <td><input type="checkbox"></td>
+        <td>
+            <div>
+                <a th:href="@{/shopping-list/edit/{id}(id=${food.id})}"><img class="button" src="/edit-button.png" ></a>
+                <a th:href="@{/shopping-list/delete/{id}(id=${food.id})}"><img class= "button" src="/delete-button.png" ></a>
+                <a th:href="@{/shopping-list/send-food-to-place/{id}(id=${food.id})}"><img class= "button" src="/forward.png" ></a>
+            </div>
+        </td>
     </tr>
     </tbody>
 </table>
-    <button type="submit">Save shopping list</button>
 </form>
+<a href="http://localhost:8085/">Go to main menu</a>
 </body>
 </html>

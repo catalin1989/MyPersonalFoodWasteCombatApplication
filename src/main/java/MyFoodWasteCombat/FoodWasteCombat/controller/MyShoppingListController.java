@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
@@ -26,10 +27,10 @@ public class MyShoppingListController {
     }
 
     @GetMapping("/shopping-list/generate")
-    public String generateShoppingList(@ModelAttribute("extendedShoppingList") List<Food> extendedShoppingList,RedirectAttributes redirectAttributes){
-        List<Food> shoppingList=shoppingListService.generateShoppingList();
-        extendedShoppingList.addAll(shoppingList);
-        redirectAttributes.addFlashAttribute("foods", extendedShoppingList);
+    public String generateShoppingList(RedirectAttributes redirectAttributes){
+        shoppingListService.generateShoppingList();
+        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list");
+        redirectAttributes.addFlashAttribute("foods", shoppingList);
         return "redirect:/shopping-list";
     }
 
@@ -40,37 +41,59 @@ public class MyShoppingListController {
     }
     @PostMapping("/shopping-list/add")
     public String addFoodToClosed(@ModelAttribute Food food,RedirectAttributes redirectAttributes){
-        System.out.println(food);
-        List<Food>listOfFoods=shoppingListService.generateShoppingList();
-        List<Food>extendedShoppingList=shoppingListService.extendShoppingList(food,listOfFoods);
-        redirectAttributes.addFlashAttribute("foods", extendedShoppingList);
+       food.setPlace("shopping_list");
+       foodService.saveFood(food);
+        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list");
+        redirectAttributes.addFlashAttribute("foods", shoppingList);
         return "redirect:/shopping-list";
     }
 
     @GetMapping("/shopping-list/delete-all")
-    public String deleteAllFoods(@ModelAttribute("extendedShoppingList") List<Food> extendedShoppingList){
-    extendedShoppingList.clear();
+    public String deleteAllFoods(){
+    foodService.deleteFoodByPlace("shopping_list");
         return "redirect:/shopping-list";
-    }
-
-    @GetMapping("/shopping-list/save-shopping-list")
-    public String saveShoppingList(){
-/*
-        System.out.println(extendedShoppingList.size());
-        for (Food food : extendedShoppingList) {
-            System.out.println(food);
-            foodService.saveFood(food);
-        }
-        //extendedShoppingList.clear();
-        return "redirect:shopping-list/save-foods";*/
-        return "null";
     }
 
     @GetMapping("shopping-list/save-foods")
     public String saveFoods(Model model){
         List<Food>listOfFoods=foodService.getFoodByPlace("null");
-        System.out.println(listOfFoods.size());
         model.addAttribute("foods", listOfFoods);
         return "shopping-list/save-foods";
+    }
+
+    @GetMapping("/shopping-list/edit/{id}")
+    public String showFoodForEditing(@PathVariable("id") Long id, Model model){
+        model.addAttribute("food",foodService.getFoodById(id));
+        return "shopping-list/update-shopping-list-food";
+    }
+
+    @PostMapping("/shopping-list/edit/{id}")
+    public String editFood(@ModelAttribute Food food,RedirectAttributes redirectAttributes){
+        foodService.updateFood(food);
+        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list");
+        redirectAttributes.addFlashAttribute("foods", shoppingList);
+        return "redirect:/shopping-list";
+    }
+    @GetMapping("/shopping-list/delete/{id}")
+    public String deleteFood(@PathVariable("id") Long id,RedirectAttributes redirectAttributes){
+        foodService.deleteFoodById(id);
+        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list");
+        redirectAttributes.addFlashAttribute("foods", shoppingList);
+        return "redirect:/shopping-list";
+    }
+
+    @GetMapping("/shopping-list/send-food-to-place/{id}")
+    public String sendFood(@PathVariable("id") Long id,Model model){
+        model.addAttribute("food",foodService.getFoodById(id));
+        return "shopping-list/send-food-to-place";
+    }
+    @PostMapping("/shopping-list/send-food-to-place/{id}")
+    public String sendFood(@ModelAttribute Food food,RedirectAttributes redirectAttributes){
+        System.out.println(food);
+        foodService.saveFood(food);
+        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list");
+        System.out.println(shoppingList);
+        redirectAttributes.addFlashAttribute("foods", shoppingList);
+        return "redirect:/shopping-list";
     }
 }

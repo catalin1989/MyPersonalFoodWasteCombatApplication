@@ -46,7 +46,7 @@ public class MyRefrigeratorController {
 
     @PostMapping("refrigerator/foods/edit/{id}")
     public String editFood(@ModelAttribute Food food){
-        myFoodService.updateFoodToCloset(food);
+        myFoodService.updateFood(food);
         return "redirect:/refrigerator/foods";
     }
 
