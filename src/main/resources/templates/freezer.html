@@ -2,21 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Freezer</title>
+    <title>Closet</title>
 </head>
 <body>
-<h1>Welcome to the freezer! </h1>
+<h2>Welcome to the freezer! </h2>
 <p>-----------------------------</p>
 <h3>To see all foods type that are stored in the freezer press the button below</h3>
-<button><a href="/refrigerator/foods">See all foods in Freezer </a></button><br>
+<button><a href="/freezer/foods">See all foods in Freezer </a></button><br>
+<p>-----------------------------</p>
 <h3> To see the foods that expire until a specific date, select the date and press the button</h3>
-<form action="/refrigerator/foods_that_will_expire_soon" method="post">
+<form action="/freezer/foods_that_will_expire_soon" method="post">
     <label for="foodsThatWillExpireSoon">Expiration Date:</label>
     <input type="date" id="foodsThatWillExpireSoon" name="expirationDate"><br>
     <button type="submit">See food that will expire soon</button>
 </form>
 <p>-----------------------------</p>
 <h3>To clear the freezer of all foods press the button below</h3>
-<button><a href="/refrigerator/clearAll">Clear the refrigerator</a></button>
+<button><a href="/freezer/clearAll">Clear the freezer</a></button>
+<p>-----------------------------</p>
+<div>
+    <a href="/closet">Go to closet</a>
+    <a href="http://localhost:8085/">Go to main menu</a>
+    <a href="/refrigerator">Go to refrigerator</a>
+</div>
 </body>
 </html>
