@@ -12,7 +12,12 @@
 
   <label for="quantity">Quantity:</label>
   <input type="number" id="quantity" th:field="*{quantity}" required>
-
+  <label for="unitMeasurement">Place:</label>
+  <select id="unitMeasurement" th:field="*{unitMeasurement}" required>
+    <option value="ml">ml</option>
+    <option value="g">g</option>
+    <option value="pieces">pieces</option>
+  </select>
   <label for="expirationDate">Expiration Date:</label>
   <input type="date" id="expirationDate" th:field="*{expirationDate}">
 

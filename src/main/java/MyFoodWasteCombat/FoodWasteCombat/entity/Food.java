@@ -21,6 +21,7 @@ public class Food implements Comparable<Food> {
     private int quantity;
     private LocalDate expirationDate;
     private String place;
+    private String unitMeasurement;
 
     public Food(String name, int quantity) {
         this.name = name;

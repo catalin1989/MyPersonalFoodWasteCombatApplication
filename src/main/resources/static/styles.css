@@ -3,8 +3,6 @@
     height: 40px; /* Set the height of the image */
 }
 
-.checkbox-container {
-    display: inline-block;
-    margin-right: 40px;
+#search-button{
+    margin-left: 20px;
 }
-

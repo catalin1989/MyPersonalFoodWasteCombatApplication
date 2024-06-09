@@ -16,6 +16,7 @@
   <tr>
     <th>Name</th>
     <th>Quantity</th>
+    <th>Unit measurement</th>
     <th>Expiration Date</th>
   </tr>
   </thead>
@@ -24,6 +25,7 @@
   <tr th:each="food : ${foods}">
     <td th:text="${food.name}"></td>
     <td th:text="${food.quantity}"></td>
+    <td th:text="${food.getUnitMeasurement()}"></td>
     <td th:text="${food.expirationDate}"></td>
     <td>
       <div>
