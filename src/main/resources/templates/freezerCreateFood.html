@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Food Form</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h1>Add food to closet</h1>
+<form action="#" th:action="@{/freezer/foods/create}" th:object="${food}" method="post">
+  <label for="name">Name:</label>
+  <input type="text" id="name" th:field="*{name}" required>
+
+  <label for="quantity">Quantity:</label>
+  <input type="number" id="quantity" th:field="*{quantity}" required>
+
+  <label for="unitMeasurement">Place:</label>
+  <select id="unitMeasurement" th:field="*{unitMeasurement}" required>
+    <option value="ml">ml</option>
+    <option value="g">g</option>
+    <option value="pieces">pieces</option>
+  </select>
+
+  <label for="expirationDate">Expiration Date:</label>
+  <input type="date" id="expirationDate" th:field="*{expirationDate}">
+
+  <button type="submit">Submit</button>
+</form>
+</body>
+</html>

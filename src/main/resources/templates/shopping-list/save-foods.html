@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Foods in Closet</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<h1>Bought foods</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the list of foods and display them -->
+    <tr th:each="food : ${foods}">
+        <td th:text="${food.name}"></td>
+        <td th:text="${food.quantity}"></td>
+
+        <td>
+            <div>
+                <a th:href="@{/closet/foods/edit/{id}(id=${food.id})}"><img class="button" src="/edit-button.png" ></a>
+                <a th:href="@{/closet/foods/delete/{id}(id=${food.id})}"><img class= "button" src="/delete-button.png" ></a>
+            </div>
+        </td>
+    </tr>
+
+    </tbody>
+
+</table>
+</body>
+</html>

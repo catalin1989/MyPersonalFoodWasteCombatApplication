@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<h1>Hello</h1>
+<a href="http://localhost:8085/">Go to main menu</a>
+<h1></h1>
+<form action="/search-for-food" method="post">
+    <label for="name">Food name:</label>
+    <input type="text" id="name" name="name"><br>
+    <button type="submit">Search</button>
+</form>
+<br>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Expiration Date</th>
+        <th>Place</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the list of foods and display them -->
+    <tr th:each="food : ${foods}">
+        <td th:text="${food.name}"></td>
+        <td th:text="${food.quantity}"></td>
+        <td th:text="${food.expirationDate}"></td>
+        <td th:text="${food.place}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
