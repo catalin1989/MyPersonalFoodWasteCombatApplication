@@ -12,3 +12,10 @@ The application has 4 main functions.
 2. I will be able to see the foods that are in these storage spaces.
 3. I will be able to see the foods that are near they're expiration date.
 4. I can send notifications that I have bought some groceries.
+
+spring_active_profile=prod
+PROD_DB_HOST=roundhouse.proxy.rlwy.net
+PROD_DB_PORT=46219
+PROD_DB_NAME=railway
+PROD_DB_PASSWORD=HPUxJmNmFjoexQBfWAPnTYxVgWWeeXdM
+PROD_DB_USERNAME=postgres
