@@ -11,7 +11,7 @@
 	<groupId>MyFoodWasteCombat</groupId>
 	<artifactId>FoodWasteCombat</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>FoodWasteCombat</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -82,7 +82,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>docker-spring-boot</finalName>
+		<finalName>foodWaste-spring-boot</finalName>
 	</build>
 
 </project>
