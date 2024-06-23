@@ -4,13 +4,17 @@
     <meta charset="UTF-8">
     <title>Shopping List</title>
     <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
 </head>
 <body>
 <h2>My shopping list</h2>
 <div>
-    <a href="/shopping-list/generate"><img class="button" src="/generate.jpeg" ></a>
+    <a href="/shopping-list/generate"><img class="button" src="/generate.png" ></a>
     <a href="/shopping-list/add"><img class="button" src="/add-button.png" ></a>
-    <a href="/shopping-list/delete-all"><img class= "button" src="/delete.jpeg" ></a>
+    <a href="/shopping-list/delete-all"><img class= "button" src="/delete.png" ></a>
 </div>
 <form th:action="@{/shopping-list/save-foods}" method="get">
 <table>
@@ -31,7 +35,7 @@
             <div>
                 <a th:href="@{/shopping-list/edit/{id}(id=${food.id})}"><img class="button" src="/edit-button.png" ></a>
                 <a th:href="@{/shopping-list/delete/{id}(id=${food.id})}"><img class= "button" src="/delete-button.png" ></a>
-                <a th:href="@{/shopping-list/send-food-to-place/{id}(id=${food.id})}"><img class= "button" src="/forward.png" ></a>
+                <a th:href="@{/shopping-list/send-food-to-place/{id}(id=${food.id})}"><img class= "button" src="/forward-arrow.png" ></a>
             </div>
         </td>
     </tr>
