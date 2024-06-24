@@ -32,4 +32,4 @@ public class FoodWasteCombatApplication implements CommandLineRunner {
 	}
 }
 
-}
+
