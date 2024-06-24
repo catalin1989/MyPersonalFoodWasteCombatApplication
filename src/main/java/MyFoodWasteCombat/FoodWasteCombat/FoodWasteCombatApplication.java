@@ -1,5 +1,6 @@
 package MyFoodWasteCombat.FoodWasteCombat;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -16,6 +17,7 @@ public class FoodWasteCombatApplication extends SpringBootServletInitializer {
 		return application.sources(FoodWasteCombatApplication.class);
 	}
 	public static void main(String[] args) {
+		Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
 		SpringApplication.run(FoodWasteCombatApplication.class, args);
 	}
 
