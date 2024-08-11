@@ -2,6 +2,7 @@ package MyFoodWasteCombat.FoodWasteCombat.controller;
 
 import MyFoodWasteCombat.FoodWasteCombat.entity.Food;
 import MyFoodWasteCombat.FoodWasteCombat.service.MyFoodService;
+import MyFoodWasteCombat.FoodWasteCombat.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,14 +17,14 @@ import java.util.List;
 public class MyRefrigeratorController {
 
     private final MyFoodService myFoodService;
-
+    private final UserService userService;
     @GetMapping("/refrigerator")
     public String getCloset(){
         return "refrigerator";
     }
     @GetMapping("/refrigerator/foods")
     public String getFoodsInCloset(Model model){
-        List<Food> foodInRefrigerator =myFoodService.getFoodByPlace("refrigerator");
+        List<Food> foodInRefrigerator =myFoodService.getFoodByPlace("refrigerator",userService.getCurrentUserId());
         model.addAttribute("foods", foodInRefrigerator);
         return "refrigerator_foods";
     }
@@ -35,6 +36,7 @@ public class MyRefrigeratorController {
     @PostMapping("/refrigerator/foods/create")
     public String addFoodToRefrigerator(@ModelAttribute Food food){
         food.setPlace("refrigerator");
+        food.setIdOfUser(userService.getCurrentUserId());
         myFoodService.saveFood(food);
         return "redirect:/refrigerator/foods";
     }
@@ -59,14 +61,14 @@ public class MyRefrigeratorController {
     @PostMapping("/refrigerator/foods_that_will_expire_soon")
     public String getFoodsThatWillExpireSoon(@RequestParam("expirationDate") LocalDate expirationDate, Model model){
         expirationDate = expirationDate.plusDays(1);
-        List<Food> listOfFoods=myFoodService.getAllFoodBeforeExpiration("refrigerator",expirationDate);
+        List<Food> listOfFoods=myFoodService.getAllFoodBeforeExpiration("refrigerator",expirationDate, userService.getCurrentUserId());
         model.addAttribute("foods",listOfFoods);
         return "foodsThatWillExpireSoon";
     }
 
     @GetMapping("/refrigerator/clearAll")
     public String clearAll(){
-        myFoodService.deleteFoodByPlace("refrigerator");
+        myFoodService.deleteFoodByPlace("refrigerator", userService.getCurrentUserId());
         return "redirect:/refrigerator";
     }
 }

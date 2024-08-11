@@ -2,6 +2,7 @@ package MyFoodWasteCombat.FoodWasteCombat.controller;
 
 import MyFoodWasteCombat.FoodWasteCombat.entity.Food;
 import MyFoodWasteCombat.FoodWasteCombat.service.MyFoodService;
+import MyFoodWasteCombat.FoodWasteCombat.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +15,7 @@ import java.util.List;
 public class MyFreezerController {
 
     private final MyFoodService myFoodService;
-
+    private final UserService userService;
     @GetMapping("/freezer")
     public String getFreezer(){
         return "freezer";
@@ -23,7 +24,7 @@ public class MyFreezerController {
 
     @GetMapping("/freezer/foods")
     public String getFoodsInCloset(Model model){
-        List<Food> foodInFreezer=myFoodService.getFoodByPlace("freezer");
+        List<Food> foodInFreezer=myFoodService.getFoodByPlace("freezer",userService.getCurrentUserId());
         model.addAttribute("foods",foodInFreezer);
         return "freezer_foods";
     }
@@ -35,6 +36,7 @@ public class MyFreezerController {
     @PostMapping("/freezer/foods/create")
     public String addFoodToFreezer(@ModelAttribute Food food){
         food.setPlace("freezer");
+        food.setIdOfUser(userService.getCurrentUserId());
         myFoodService.saveFood(food);
         return "redirect:/freezer/foods";
     }
@@ -58,14 +60,14 @@ public class MyFreezerController {
     @PostMapping("/freezer/foods_that_will_expire_soon")
     public String getFoodsThatWillExpireSoon(@RequestParam("expirationDate") LocalDate expirationDate, Model model){
         expirationDate = expirationDate.plusDays(1);
-        List<Food> listOfFoods=myFoodService.getAllFoodBeforeExpiration("freezer",expirationDate);
+        List<Food> listOfFoods=myFoodService.getAllFoodBeforeExpiration("freezer",expirationDate, userService.getCurrentUserId());
         model.addAttribute("foods",listOfFoods);
         return "foodsThatWillExpireSoon";
     }
 
     @GetMapping("/freezer/clearAll")
     public String clearAll(){
-        myFoodService.deleteFoodByPlace("freezer");
+        myFoodService.deleteFoodByPlace("freezer", userService.getCurrentUserId());
         return "redirect:/freezer";
     }
 }

@@ -14,9 +14,9 @@ import java.util.List;
 public class MyFoodStockService {
 
     private final MyFoodRepository foodRepository;
-
+    private final UserService userService;
     public List<Food> getAllFoodStock() {
-        return foodRepository.getFoodByPlace("food_stock");
+        return foodRepository.getFoodByPlaceAndIdOfUser("food_stock",userService.getCurrentUserId());
     }
 
     public void addFoodStock(Food food) {
@@ -24,7 +24,7 @@ public class MyFoodStockService {
     }
     @Transactional
     public void deleteAllFoodStock() {
-        foodRepository.deleteFoodByPlace("food_stock");
+        foodRepository.deleteFoodByPlaceAndIdOfUser("food_stock",userService.getCurrentUserId());
     }
 
     public Food getFoodStockById(Long id) {

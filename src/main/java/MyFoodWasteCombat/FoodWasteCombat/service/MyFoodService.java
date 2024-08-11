@@ -16,12 +16,12 @@ public class MyFoodService {
 
     private final MyFoodRepository foodRepository;
 
-    public List<Food> getFoodByName(String name){
-        return foodRepository.getFoodByName(name);
+    public List<Food> getFoodByName(String name,Long idOfUser){
+        return foodRepository.getFoodByNameAndIdOfUser(name,idOfUser);
     }
 
-    public List<Food> getFoodByPlace(String place){
-        return foodRepository.getFoodByPlace(place);
+    public List<Food> getFoodByPlace(String place,Long id){
+        return foodRepository.getFoodByPlaceAndIdOfUser(place,id);
     }
 
     public void saveFood(Food food){
@@ -34,11 +34,12 @@ public class MyFoodService {
         if(food.getExpirationDate()==null) {
             food.setExpirationDate(existingFood.getExpirationDate());
         }
+        food.setIdOfUser(existingFood.getIdOfUser());
        food.setPlace(existingFood.getPlace());
         foodRepository.save(food);
     }
-    public List<Food> getFoodsByNameAndPlace(String name, String place){
-        return foodRepository.getFoodByNameAndPlace(name, place);
+    public List<Food> getFoodsByNameAndPlace(String name, String place,Long idOfUser){
+        return foodRepository.getFoodByNameAndPlaceAndIdOfUser(name, place,idOfUser);
     }
     public Food getFoodById(Long id){
        return foodRepository.getReferenceById(id);
@@ -47,18 +48,18 @@ public class MyFoodService {
     public void deleteFoodById(Long id){
         foodRepository.deleteById(id);
     }
-    public List<Food> getAllFoodBeforeExpiration(String place, LocalDate expirationDate){
-        return foodRepository.getFoodByPlaceAndExpirationDateBefore(place, expirationDate);
+    public List<Food> getAllFoodBeforeExpiration(String place, LocalDate expirationDate, Long idOfUser){
+        return foodRepository.getFoodByPlaceAndExpirationDateBeforeAndIdOfUser(place, expirationDate, idOfUser);
     }
     @Transactional
-    public void deleteFoodByPlace(String place){
-        foodRepository.deleteFoodByPlace(place);
+    public void deleteFoodByPlace(String place,Long idOfUser){
+        foodRepository.deleteFoodByPlaceAndIdOfUser(place,idOfUser);
     }
 
-    public List<Food> getAllFoodsWithName(String name){
-        List<Food>foodsFromCloset=foodRepository.getFoodByNameAndPlace(name,"closet");
-        List<Food>foodsFromFreezer=foodRepository.getFoodByNameAndPlace(name,"freezer");
-        List<Food>foodsFromRefrigerator=foodRepository.getFoodByNameAndPlace(name,"refrigerator");
+    public List<Food> getAllFoodsWithName(String name,Long idOfUser){
+        List<Food>foodsFromCloset=foodRepository.getFoodByNameAndPlaceAndIdOfUser(name,"closet",idOfUser);
+        List<Food>foodsFromFreezer=foodRepository.getFoodByNameAndPlaceAndIdOfUser(name,"freezer",idOfUser);
+        List<Food>foodsFromRefrigerator=foodRepository.getFoodByNameAndPlaceAndIdOfUser(name,"refrigerator",idOfUser);
         List<Food>finalFoodList=new ArrayList<>();
         finalFoodList.addAll(foodsFromCloset);
         finalFoodList.addAll(foodsFromFreezer);

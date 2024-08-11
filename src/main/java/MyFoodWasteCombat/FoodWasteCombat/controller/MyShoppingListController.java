@@ -3,6 +3,7 @@ package MyFoodWasteCombat.FoodWasteCombat.controller;
 import MyFoodWasteCombat.FoodWasteCombat.entity.Food;
 import MyFoodWasteCombat.FoodWasteCombat.service.MyFoodService;
 import MyFoodWasteCombat.FoodWasteCombat.service.MyShoppingListService;
+import MyFoodWasteCombat.FoodWasteCombat.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,7 @@ import java.util.List;
 public class MyShoppingListController {
     private final MyFoodService foodService;
     private final MyShoppingListService shoppingListService;
-
+    private final UserService userService;
 
     @GetMapping("/shopping-list")
     public String shoppingList(){
@@ -28,8 +29,8 @@ public class MyShoppingListController {
 
     @GetMapping("/shopping-list/generate")
     public String generateShoppingList(RedirectAttributes redirectAttributes){
-        shoppingListService.generateShoppingList();
-        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list");
+        shoppingListService.generateShoppingList(userService.getCurrentUserId());
+        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list", userService.getCurrentUserId());
         redirectAttributes.addFlashAttribute("foods", shoppingList);
         return "redirect:/shopping-list";
     }
@@ -42,21 +43,22 @@ public class MyShoppingListController {
     @PostMapping("/shopping-list/add")
     public String addFoodToClosed(@ModelAttribute Food food,RedirectAttributes redirectAttributes){
        food.setPlace("shopping_list");
+       food.setIdOfUser(userService.getCurrentUserId());
        foodService.saveFood(food);
-        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list");
+        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list",userService.getCurrentUserId());
         redirectAttributes.addFlashAttribute("foods", shoppingList);
         return "redirect:/shopping-list";
     }
 
     @GetMapping("/shopping-list/delete-all")
     public String deleteAllFoods(){
-    foodService.deleteFoodByPlace("shopping_list");
+    foodService.deleteFoodByPlace("shopping_list", userService.getCurrentUserId());
         return "redirect:/shopping-list";
     }
 
     @GetMapping("shopping-list/save-foods")
     public String saveFoods(Model model){
-        List<Food>listOfFoods=foodService.getFoodByPlace("null");
+        List<Food>listOfFoods=foodService.getFoodByPlace("null",userService.getCurrentUserId());
         model.addAttribute("foods", listOfFoods);
         return "shopping-list/save-foods";
     }
@@ -70,14 +72,14 @@ public class MyShoppingListController {
     @PostMapping("/shopping-list/edit/{id}")
     public String editFood(@ModelAttribute Food food,RedirectAttributes redirectAttributes){
         foodService.updateFood(food);
-        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list");
+        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list",userService.getCurrentUserId());
         redirectAttributes.addFlashAttribute("foods", shoppingList);
         return "redirect:/shopping-list";
     }
     @GetMapping("/shopping-list/delete/{id}")
     public String deleteFood(@PathVariable("id") Long id,RedirectAttributes redirectAttributes){
         foodService.deleteFoodById(id);
-        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list");
+        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list",userService.getCurrentUserId());
         redirectAttributes.addFlashAttribute("foods", shoppingList);
         return "redirect:/shopping-list";
     }
@@ -90,8 +92,9 @@ public class MyShoppingListController {
     @PostMapping("/shopping-list/send-food-to-place/{id}")
     public String sendFood(@ModelAttribute Food food,RedirectAttributes redirectAttributes){
         System.out.println(food);
+        food.setIdOfUser(userService.getCurrentUserId());
         foodService.saveFood(food);
-        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list");
+        List<Food>shoppingList=foodService.getFoodByPlace("shopping_list",userService.getCurrentUserId());
         System.out.println(shoppingList);
         redirectAttributes.addFlashAttribute("foods", shoppingList);
         return "redirect:/shopping-list";
