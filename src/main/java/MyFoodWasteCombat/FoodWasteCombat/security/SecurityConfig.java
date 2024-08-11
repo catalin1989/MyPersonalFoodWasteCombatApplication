@@ -23,8 +23,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrfConfig->csrfConfig.disable())
-                .authorizeHttpRequests((request)->request.requestMatchers("/MyFoods").authenticated()
-                        .requestMatchers("/welcome","/register","/register/submit","/styles.css").permitAll());
+                .authorizeHttpRequests((request)->request//.requestMatchers("/MyFoods").authenticated()
+                        .requestMatchers("/welcome","/register","/register/submit","/styles.css").permitAll()
+                        .anyRequest().authenticated());
         http.formLogin(withDefaults());
         http.httpBasic(withDefaults());
         return http.build();
@@ -32,6 +33,6 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 }

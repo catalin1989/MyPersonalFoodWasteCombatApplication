@@ -1,9 +1,6 @@
 package MyFoodWasteCombat.FoodWasteCombat.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,6 +19,7 @@ public class Food implements Comparable<Food> {
     private LocalDate expirationDate;
     private String place;
     private String unitMeasurement;
+    private Long idOfUser;
 
     public Food(String name, int quantity) {
         this.name = name;
@@ -31,6 +29,12 @@ public class Food implements Comparable<Food> {
         this.name = name;
         this.quantity = quantity;
         this.place = place;
+    }
+    public Food(String name, int quantity,String place,Long idOfUser) {
+        this.name = name;
+        this.quantity = quantity;
+        this.place = place;
+        this.idOfUser = idOfUser;
     }
 
 
@@ -46,11 +50,11 @@ public class Food implements Comparable<Food> {
     @Override
     public String toString() {
         return "Food{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", quantity=" + quantity +
+                "name='" + name + '\'' +
                 ", expirationDate=" + expirationDate +
                 ", place='" + place + '\'' +
+                ", idOfUser=" + idOfUser +
+                ", quantity=" + quantity +
                 '}';
     }
 }

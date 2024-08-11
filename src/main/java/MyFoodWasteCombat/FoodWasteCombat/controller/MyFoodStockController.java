@@ -2,6 +2,7 @@ package MyFoodWasteCombat.FoodWasteCombat.controller;
 
 import MyFoodWasteCombat.FoodWasteCombat.entity.Food;
 import MyFoodWasteCombat.FoodWasteCombat.service.MyFoodStockService;
+import MyFoodWasteCombat.FoodWasteCombat.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import java.util.List;
 public class MyFoodStockController {
 
 private final MyFoodStockService myFoodStockService;
+    private final UserService userService;
 
     @GetMapping("/required-foods")
     public String requiredFoods(Model model) {
@@ -35,6 +37,7 @@ private final MyFoodStockService myFoodStockService;
     @PostMapping("/required-foods/create")
     public String addFoodToClosed(@ModelAttribute Food food){
         food.setPlace("food_stock");
+        food.setIdOfUser(userService.getCurrentUserId());
         myFoodStockService.addFoodStock(food);
 
         return "redirect:/required-foods";
@@ -56,6 +59,7 @@ private final MyFoodStockService myFoodStockService;
     @PostMapping("required-foods/edit/{id}")
     public String editFood(@ModelAttribute Food food){
         food.setPlace("food_stock");
+        food.setIdOfUser(userService.getCurrentUserId());
        myFoodStockService.updateFoodStock(food);
 
         return "redirect:/required-foods";

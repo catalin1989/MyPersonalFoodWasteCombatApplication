@@ -10,12 +10,13 @@ import java.util.List;
 @Repository
 public interface MyFoodRepository extends JpaRepository<Food,Long> {
 
-    List<Food> getFoodByPlace(String place);
-    List<Food> getFoodByName(String name);
+    List<Food> getFoodByPlaceAndIdOfUser(String place, Long userId);
+    List<Food> getFoodByNameAndIdOfUser(String name, Long userId);
 
-    List<Food> getFoodByPlaceAndExpirationDateBefore(String place, LocalDate expirationDate);
-    List<Food> getFoodByNameAndPlace(String name, String place);
-    void deleteFoodByPlace(String place);
+    List<Food> getFoodByPlaceAndExpirationDateBeforeAndIdOfUser(String place, LocalDate expirationDate,Long id);
+    List<Food> getFoodByNameAndPlaceAndIdOfUser(String name, String place,Long idOfUser);
+    void deleteFoodByPlaceAndIdOfUser(String place,Long id);
+
 }
 
 
