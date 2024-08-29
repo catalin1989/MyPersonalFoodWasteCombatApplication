@@ -24,9 +24,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(csrfConfig->csrfConfig.disable())
                 .authorizeHttpRequests((request)->request//.requestMatchers("/MyFoods").authenticated()
-                        .requestMatchers("/welcome","/register","/register/submit","/styles.css").permitAll()
+                        .requestMatchers("/welcome","/register","/register/submit","/styles.css","/login").permitAll()
                         .anyRequest().authenticated());
-        http.formLogin(withDefaults());
+        http.formLogin(flc->flc.loginPage("/login").defaultSuccessUrl("/MyFoods").failureUrl("/login?error"));
+        http.logout(loc->loc.logoutSuccessUrl("/welcome").invalidateHttpSession(true).deleteCookies("JSESSIONID"));
         http.httpBasic(withDefaults());
         return http.build();
     }

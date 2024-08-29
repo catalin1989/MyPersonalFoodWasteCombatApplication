@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 @RequiredArgsConstructor
-public class MainController {
+public class SecurityController {
 
     private final UserService userService;
 
@@ -30,7 +30,11 @@ public class MainController {
     public String createUser(@ModelAttribute User user) {
         user.setRole("users");
         userService.saveUser(user);
-        System.out.println("Created user: " + user.getUsername());
+
         return "redirect:/welcome";
+    }
+    @GetMapping("/login")
+    public String login(){
+        return "login/login";
     }
 }

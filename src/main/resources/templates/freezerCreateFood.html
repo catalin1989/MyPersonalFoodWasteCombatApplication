@@ -1,15 +1,65 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Food Form</title>
+  <title>Add Food to Closet</title>
   <link rel="stylesheet" href="/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #e0f7fa;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    form {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #333;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-<h1>Add food to closet</h1>
+<h1>Add Food to Freezer</h1>
 <form action="#" th:action="@{/freezer/foods/create}" th:object="${food}" method="post">
   <label for="name">Name:</label>
   <input type="text" id="name" th:field="*{name}" required>
@@ -17,7 +67,7 @@
   <label for="quantity">Quantity:</label>
   <input type="number" id="quantity" th:field="*{quantity}" required>
 
-  <label for="unitMeasurement">Place:</label>
+  <label for="unitMeasurement">Unit Measurement:</label>
   <select id="unitMeasurement" th:field="*{unitMeasurement}" required>
     <option value="ml">ml</option>
     <option value="g">g</option>

@@ -1,15 +1,87 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Food Form</title>
   <link rel="stylesheet" href="/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background-color: #e0f7fa; /* Light cyan background color */
+      margin: 0;
+      padding: 20px;
+      position: relative; /* Ensure the positioning for the button works */
+    }
+    h2 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #333;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      border: none;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .main-menu-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      display: block;
+      padding: 10px 20px;
+      background-color: #28a745; /* Green background color */
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+    .main-menu-link:hover {
+      background-color: #218838; /* Darker green for hover effect */
+    }
+  </style>
 </head>
 <body>
-<h2>Put the food into the refrigerator, the freezer or the closet</h2>
+
+<a href="/MyFoods" class="main-menu-link">Go to Main Menu</a>
+
+<h2>Put the food into the refrigerator, the freezer, or the closet</h2>
+
 <form action="#" th:href="@{/shopping-list/send-food-to-place/{id}(id=${food.id})}" th:object="${food}" method="post">
   <label for="name">Name:</label>
   <input type="text" id="name" th:field="*{name}" required>
@@ -29,5 +101,6 @@
 
   <button type="submit">Submit</button>
 </form>
+
 </body>
 </html>
